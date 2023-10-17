@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  proxy:
+    image: nginx:alpine
+    container_name: proxy
+    restart: unless-stopped
+    volumes:
+      - ./data:/etc/nginx/conf.d
+      - ./certs:/etc/certs
+    networks:
+    # We use the network proxy-net as example
+      proxy-net:
+      
+networks:
+  proxy-net:
+  # If it is external, we have to create the network before starting the container
+    external: true
